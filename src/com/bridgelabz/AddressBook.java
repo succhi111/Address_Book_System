@@ -6,18 +6,18 @@ import java.util.Scanner;
 public class AddressBook {
 
 
-    private ArrayList<Contact> modelContactList;  			// Declearing Arraylist
+    private ArrayList<Contact> ContactList;  			// Declearing Arraylist
 
     public AddressBook()
     {
-        modelContactList = new ArrayList<Contact>();  		// Initaillizing Arraylist
+        ContactList = new ArrayList<Contact>();  		// Initaillizing Arraylist
     }
 
     // Creating a Method and Adding object in a Arraylist
     public void addContact(Contact createPerson)
     {
         System.out.println("Adding a New Contact for " + createPerson.firstName);
-        modelContactList.add(createPerson);
+        ContactList.add(createPerson);
     }
 
     public void editContact() 				// Creating a Method and Edit with Switch Statement
@@ -25,7 +25,7 @@ public class AddressBook {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter First Name of Contact to Edit it");
         String cName = sc.nextLine();
-        Contact editContact = modelContactList.get(cName.indexOf(cName));
+        Contact editContact = ContactList.get(cName.indexOf(cName));
         if (editContact.getFirstName().equals(cName))
         {
 
