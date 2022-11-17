@@ -13,14 +13,39 @@ public class AddressBook {
         ContactList = new ArrayList<Contact>();  		// Initaillizing Arraylist
     }
 
-    // Creating a Method and Adding object in a Arraylist
+    public Contact getContactInput()				// Getting a Input from User
+    {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter First Name:");
+        String fName = sc.nextLine();
+        System.out.println("Enter Last Name:");
+        String lName = sc.nextLine();
+        System.out.println("Enter the Address:");
+        String address = sc.nextLine();
+        System.out.println("Enter the City:");
+        String city = sc.nextLine();
+        System.out.println("Enter the State:");
+        String state = sc.nextLine();
+        System.out.println("Enter the Zip:");
+        long zip = sc.nextLong();
+        System.out.println("Enter the Phone No:");
+        long phoneNo = sc.nextLong();
+        sc.nextLine();
+        System.out.println("Enter the Email:");
+        String email = sc.nextLine();
+
+        Contact contact = new Contact(fName, lName, address, city, state, email, zip, phoneNo);
+        return contact;
+    }
+
     public void addContact(Contact createPerson)
     {
-        System.out.println("Adding a New Contact for " + createPerson.firstName);
+        System.out.println("Adding a New Contact for " + createPerson.firstName);      // Creating a Method and Adding object in a Arraylist
         ContactList.add(createPerson);
     }
 
-    public void editContact() 				// Creating a Method and Edit with Switch Statement
+    public void editContact() 								// Creating a Method and Edit with Switch Statement
     {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter First Name of Contact to Edit it");
@@ -103,31 +128,41 @@ public class AddressBook {
         }
     }
 
-    public Contact getContactInput()					// Getting a Input from User
+    public void deleteContact() 							// Creating a Method and Deleting Contact with Using First Name
     {
-
-
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter First Name:");
-        String fName = sc.nextLine();
-        System.out.println("Enter Last Name:");
-        String lName = sc.nextLine();
-        System.out.println("Enter the Address:");
-        String address = sc.nextLine();
-        System.out.println("Enter the City:");
-        String city = sc.nextLine();
-        System.out.println("Enter the State:");
-        String state = sc.nextLine();
-        System.out.println("Enter the Zip:");
-        long zip = sc.nextLong();
-        System.out.println("Enter the Phone No:");
-        long phoneNo = sc.nextLong();
-        sc.nextLine();
-        System.out.println("Enter the Email:");
-        String email = sc.nextLine();
+        System.out.println("Enter First Name of Contact to Delete it");
+        String cName = sc.nextLine();
+        Contact editContact = ContactList.get(cName.indexOf(cName));
+        if (editContact.getFirstName().equals(cName))
+        {
 
-        Contact contact = new Contact(fName, lName, address, city, state, email, zip, phoneNo);
-        return contact;
+            ContactList.remove(editContact);
+        }
+        else
+        {
+            System.out.println("No such Contact to Delete");
+        }
+    }
+
+    public void viewContacts() 								// Accessing Contact into ArrayList and Display One By One
+    {
+        if (ContactList.size() == 0)
+        {
+            System.out.println("No Contact Here.");
+        }
+        else
+        {
+            for(int i = 0; i<ContactList.size(); i++)
+            {
+                int num = i+1;
+                System.out.println("Availble Contact In List : "+ num);
+                System.out.println("First Name :" +ContactList.get(i).firstName + " Last Name :" + ContactList.get(i).lastName);
+                System.out.println("Address :" +ContactList.get(i).address + " City :" + ContactList.get(i).city + " State :" + ContactList.get(i).state + " Zip :" + ContactList.get(i).zip);
+                System.out.println("Phone No :" +ContactList.get(i).phoneNo);
+                System.out.println("Email :" +ContactList.get(i).email);
+            }
+        }
     }
 
     public static void main(String[] args)
@@ -139,7 +174,7 @@ public class AddressBook {
         AddressBook AD = new AddressBook(); 					// Creating a Object of Main Class
         while(true)												// Checking a Choice with Switch Statement
         {
-            System.out.println("1.Adding Contact \n2.Update \n3.Exit");
+            System.out.println("1.Adding Contact \n2.Update Contact \n3.Delete Contact \n4.View Contact\n5.Exit");
             System.out.println("Enter a Your Choice :");
             ch = sc.nextInt();
 
@@ -158,8 +193,21 @@ public class AddressBook {
                     break;
 
                 case 3:
+                    AD.deleteContact();
+                    System.out.println("Contact Delete Successfully");
+                    break;
+
+                case 4:
+                    AD.viewContacts();
+                    System.out.println("Showing All Contact Details");
+                    break;
+
+                case 5:
+
                     System.out.println("Thank You We are Exiting");
-                    return;
+                    System.exit(0);
+                    break;
+
 
                 default:
                     System.out.println("Sorry You are Type Wrong Choice");
