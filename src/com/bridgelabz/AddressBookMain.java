@@ -1,6 +1,6 @@
 package com.bridgelabz;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBookMain {
 
@@ -21,31 +21,35 @@ public class AddressBookMain {
         int zip = scanner.nextInt();
         System.out.println("Please provide phone number");
         String phoneNumber = scanner.next();
-        Contacts person = new Contacts(firstName, lastName, address, city, state, zip, phoneNumber);
-        return person;
+        Contacts contact = new Contacts(firstName, lastName, address, city, state, zip, phoneNumber);
+        return contact;
     }
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         /*
          * Adding Contacts details using Constructor of person class
          */
-        Contacts person1 = new Contacts("Vinayak", "Garole", "Ranale", "Nandurbar", "Maharashtra", 425411, "8380867601");
-        Contacts person2 = new Contacts("Sandeep", "Pangare", "Rajale", "Nandurbar", "Maharashtra", 425411, "8380867602");
+        Contacts contact1 = new Contacts("Raj", "Aditya", "noida", "delhi", "Maharashtra", 425411, "8380867601");
+        Contacts contact2 = new Contacts("Sandeep", "Pangare", "Rajale", "Nandurbar", "Maharashtra", 425411, "8380864512");
+        Contacts contact3 = new Contacts("Sumit", "mishra", "mumbai", "Pune", "Maharashtra", 92226, "4849849840");
+        Contacts contact4 = new Contacts("Rahul", "Bhosale", "Satara", "Satara", "Maharashtra", 986544, "44948270");
+        Contacts contact5 = new Contacts("Suchendra", "Mishra", "Mahur", "Vithol", "Jharakhand", 26556, "2554654");
 
         /*
          * Adding contacts to different address books by using addContact method means every single address book
          * has multiple contacts
          */
         AddressBook addressBook = new AddressBook();
-        addressBook.addContact(person1);
-        addressBook.addContact(person2);
-        System.out.println("Address book before adding new contact is: ");
-        addressBook.printAddressBook();
+        addressBook.addContact(contact1);
+        addressBook.addContact(contact2);
+        addressBook.addContact(contact3);
+        addressBook.addContact(contact4);
+        addressBook.addContact(contact5);
 
-        System.out.println("Checking duplicate entry before adding new contact");
-        addressBook.addContact(input(sc));
-        addressBook.printAddressBook();
+        addressBook.addContact(input(scanner));
+        System.out.println("Contacts of person in the same city are ");
+        addressBook.search("Ranchi");
     }
 }
